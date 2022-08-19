@@ -2,13 +2,20 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectTrending } from "../features/movie/movieSlice";
+import { useEffect } from "react";
+import { useState } from "react";
 
-const Trending = (props) => {
-  const movies = useSelector(selectTrending);
+const MoviesView = () => {
+  const selectedMovies = useSelector(selectTrending);
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    setMovies(selectedMovies);
+  }, [selectedMovies]);
 
   return (
     <Container>
-      <h4>Trending</h4>
+      <h4>Movies</h4>
       <Content>
         {movies &&
           movies.map((movie, key) => (
@@ -69,4 +76,4 @@ const Wrap = styled.div`
   }
 `;
 
-export default Trending;
+export default MoviesView;
